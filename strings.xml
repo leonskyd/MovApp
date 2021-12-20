@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MyMovie</string>
+    <string name="button_text">Back</string>
+    <string name="title_text">Title</string>
+    <string name="director_text">Director</string>
+    <string name="year_text">Year</string>
+    <string name="overview_text">Overview</string>
+    <string name="rank_text">Imdb:</string>
+    <string name="reload">Reload</string>
+    <string name="error">Error</string>
+    <string name="genre">genre</string>
+    <string name="back_to_list">back to list</string>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textview_height">40dp</dimen>
+    <dimen name="between_textviews">20dp</dimen>
+    <dimen name="from_start">20dp</dimen>
+    <dimen name="from_end">20dp</dimen>
+    <dimen name="from_top">100dp</dimen>
+    <dimen name="overview_height">100dp</dimen>
+    <dimen name="button_height">40dp</dimen>
+    <dimen name="button_from_top">50dp</dimen>
+    <dimen name="button_from_left">50dp</dimen>
+    <dimen name="text_height">32sp</dimen>
+    <dimen name="recycler_item_padding">10dp</dimen>
+    <dimen name="recycler_item_text_size">24sp</dimen>
+    <dimen name="recycler_item_line_height">1dp</dimen>
+    <dimen name="recycler_item_line_margin_end">20dp</dimen>
+    <dimen name="fab_icon_size">20dp</dimen>
+    <dimen name="fab_margin">12dp</dimen>
+    <dimen name="text_size">20sp</dimen>
+
+</resources>
