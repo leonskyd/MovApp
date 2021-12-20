@@ -1,30 +1,47 @@
 package com.example.movapp.ui.main
-
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.movapp.R
+import com.example.mymovie.databinding.MainFragmentBinding
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment() { // Здесь рандомно будет выбираться фильм по id
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance(bundle: Bundle?): MainFragment {
+            val fragment = MainFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 
-    private lateinit var viewModel: MainViewModel
+    private var _binding: MainFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+                              savedInstanceState: Bundle?): View? {
+
+        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val movie = arguments?.getParcelable<Movie>("MOVIE_INFO")
+
+        title.text = movie?.title ?: " "
+        year.text = movie?.release ?: " "
+        genre.text = movie?.genre ?: " "
+        overView.text = movie?.overview ?: " "
+        rank.text = movie?.rank.toString()?: " "
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
