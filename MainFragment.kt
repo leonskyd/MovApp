@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mymovie.databinding.MainFragmentBinding
 
-class MainFragment : Fragment() { // Здесь рандомно будет выбираться фильм по id
+class MainFragment : Fragment() { 
 
     companion object {
         fun newInstance(bundle: Bundle?): MainFragment {
