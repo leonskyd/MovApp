@@ -28,7 +28,9 @@ class ListFragment : Fragment() {
 
 
 
-    private lateinit var viewModel: ListViewModel
+    private val viewModel: ListViewModel by lazy {
+        ViewModelProvider(this).get(ListViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,14 +40,12 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
-
+       
         binding.listRecyclerView.adapter = adapter
         binding.listRecyclerView.layoutManager= LinearLayoutManager(requireActivity())
 
         adapter.listener = Adapter.OnItemClick {
-            val bundle = Bundle()
-            bundle.putParcelable("MOVIE_INFO", it)
+              val bundle = Bundle().apply {putParcelable("MOVIE_INFO", it)}
             requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.list_container, MainFragment.newInstance(bundle))
                     .addToBackStack("")
@@ -57,16 +57,16 @@ class ListFragment : Fragment() {
 
     }
 
-    private fun render(state: AppState?) {
+  private fun render(state: AppState?) = with(binding) {
         when (state) {
             is AppState.Success -> {
-                binding.mainFragmentLoadingLayout.visibility = View.GONE
+                mainFragmentLoadingLayout.hide() // from Utils.kt
                 val movie: List<Movie> = state.movieData as List<Movie>
                 adapter.setMovie(movie)
             }
             is AppState.Error -> {
-                binding.mainFragmentLoadingLayout.visibility = View.VISIBLE
-                Snackbar.make(binding.root,
+                mainFragmentLoadingLayout.show()
+                Snackbar.make(root,
                         state.error.message.toString(),
                         Snackbar.LENGTH_INDEFINITE)
                         .setAction("Try it again") {
@@ -75,10 +75,11 @@ class ListFragment : Fragment() {
 
             }
             is AppState.Loading -> {
-                binding.mainFragmentLoadingLayout.visibility = View.VISIBLE
+                mainFragmentLoadingLayout.show()
             }
         }
     }
+  
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
