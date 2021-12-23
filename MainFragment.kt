@@ -28,14 +28,18 @@ class MainFragment : Fragment() { // Здесь рандомно будет вы
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
+        
+    getMovieInfo()
+    }
 
-        val movie = arguments?.getParcelable<Movie>("MOVIE_INFO")
-
-        title.text = movie?.title ?: " "
-        year.text = movie?.release ?: " "
-        genre.text = movie?.genre ?: " "
-        overView.text = movie?.overview ?: " "
-        rank.text = movie?.rank.toString()?: " "
+    private fun getMovieInfo() = with(binding) {
+        arguments?.getParcelable<Movie>("MOVIE_INFO")?.let{ movie ->
+            title.text = movie.title
+            year.text = movie.release
+            genre.text = movie.genre
+            overView.text = movie.overview
+            rank.text = movie.rank.toString()
+        }
     }
 
 
