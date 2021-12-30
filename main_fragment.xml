@@ -1,20 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainFragment">
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/textview_height"
+        android:layout_marginTop="@dimen/from_top"
+        android:layout_marginEnd="@dimen/from_end"
+        android:layout_marginStart="@dimen/from_start"
+        android:shadowColor="@color/teal_200"
+        android:text= "enter id number"
+        android:textSize="@dimen/text_size"
+        />
 
     <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MainFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/textview_height"
+        android:layout_marginTop="@dimen/from_top"
+        android:layout_marginEnd="@dimen/from_end"
+        android:layout_marginStart="@dimen/from_start"
+        android:shadowColor="@color/teal_200"
+        android:text="@string/title_text"
+        android:textSize="@dimen/text_size"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/textview_height"
+        android:layout_marginTop="@dimen/between_textviews"
+        android:layout_marginEnd="@dimen/from_end"
+        android:layout_marginStart="@dimen/from_start"
+        android:shadowColor="@color/teal_200"
+        android:text="@string/year_text"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/teal_700"
+        />
+
+
+    <TextView
+        android:id="@+id/overView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/overview_height"
+        android:layout_marginTop="@dimen/between_textviews"
+        android:layout_marginEnd="@dimen/from_end"
+        android:layout_marginStart="@dimen/from_start"
+        android:shadowColor="@color/teal_200"
+        android:text="@string/overview_text"
+        android:textSize="@dimen/text_size"
+        />
+
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/textview_height"
+        android:layout_marginTop="@dimen/between_textviews"
+        android:layout_marginEnd="@dimen/from_end"
+        android:layout_marginStart="@dimen/from_start"
+        android:shadowColor="@color/teal_200"
+        android:text="@string/rank_text"
+        android:textSize="@dimen/text_size"
+        />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/textview_height"
+        android:layout_marginTop="@dimen/between_textviews"
+        android:layout_marginEnd="@dimen/from_end"
+        android:layout_marginStart="@dimen/from_start"
+        android:shadowColor="@color/teal_200"
+        android:text="@string/back_to_list"
+        android:textSize="@dimen/text_size"
+        />
+
+</LinearLayout>
