@@ -15,7 +15,10 @@ class MainFragment : Fragment() {
             return fragment
         }
     }
-
+     private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
+   
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -34,11 +37,25 @@ class MainFragment : Fragment() {
 
     private fun getMovieInfo() = with(binding) {
         arguments?.getParcelable<Movie>("MOVIE_INFO")?.let{ movie ->
-            title.text = movie.title
-            year.text = movie.release
-            genre.text = movie.genre
-            overView.text = movie.overview
-            rank.text = movie.rank.toString()
+       
+               MovieLoader.loadMovieFromWeb(movie.index,
+                  object:MovieLoader.OnMovieLoadListener{
+                      override fun onLoaded(webMovie: WebMovie) {
+                              title.text = webMovie?.original_title
+                              year.text = webMovie?.release_date
+                              overView.text = webMovie?.overview
+                              rank.text = webMovie?.vote_average.toString()
+
+
+                          viewModel.saveHistory(movie)
+
+                      }
+
+                      override fun onFailed(throwable: Throwable) {
+                          Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
+                      }
+
+                  })
         }
     }
 
