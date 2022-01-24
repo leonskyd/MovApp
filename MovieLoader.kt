@@ -15,6 +15,39 @@ import java.util.stream.Collectors
 object MovieLoader { //https://api.themoviedb.org/3/movie/550?api_key=01141597fb9a845a9ce999e83b8db575
 
     private const val API_KEY: String = "01141597fb9a845a9ce999e83b8db575"
+    
+    private val movieApi = Retrofit.Builder()
+        .baseUrl("https://api.themoviedb.org/")
+        .addConverterFactory(
+            GsonConverterFactory.create(
+                GsonBuilder().setLenient().create()))
+        .build()
+        .create(MovieApi::class.java)
+
+    fun loadWithRetro(id: Int?, listener: OnMovieLoadListener) {
+        if (id != null) {
+            movieApi.getMovie(id, API_KEY)
+                .enqueue(object: retrofit2.Callback<WebMovie>{
+                    override fun onResponse(
+                        call: retrofit2.Call<WebMovie>,
+                        response: retrofit2.Response<WebMovie>
+                    ) {
+                        if(response.isSuccessful) {
+                            response.body()?.let{
+                                listener.onLoaded(it)                     }
+                        } else {
+                            listener.onFailed(Exception(response.message()))
+                            Log.e("DEBUGLOG", "FATAL CONNECTION $response")
+                        }
+                    }
+
+                    override fun onFailure(call: retrofit2.Call<WebMovie>, t: Throwable) {
+                        listener.onFailed(t)
+                    }
+
+                })
+        }
+    }
 
     fun loadMovieFromWeb(id: Int?, listener: OnMovieLoadListener) {
 
